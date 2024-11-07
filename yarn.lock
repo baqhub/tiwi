@@ -5,6 +5,17 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
+"@baqhub/tiwi-native@workspace:packages/tiwi-native":
+  version: 0.0.0-use.local
+  resolution: "@baqhub/tiwi-native@workspace:packages/tiwi-native"
+  dependencies:
+    tsconfig-to-dual-package: "npm:1.2.0"
+    tslib: "npm:^2.8.1"
+    typescript: "npm:5.6.3"
+    vitest: "npm:2.1.4"
+  languageName: unknown
+  linkType: soft
+
 "@baqhub/tiwi@workspace:packages/tiwi":
   version: 0.0.0-use.local
   resolution: "@baqhub/tiwi@workspace:packages/tiwi"

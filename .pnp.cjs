@@ -17,12 +17,17 @@ const RAW_RUNTIME_STATE =
     {\
       "name": "@baqhub/tiwi",\
       "reference": "workspace:packages/tiwi"\
+    },\
+    {\
+      "name": "@baqhub/tiwi-native",\
+      "reference": "workspace:packages/tiwi-native"\
     }\
   ],\
   "enableTopLevelFallback": true,\
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
     ["@baqhub/tiwi", ["workspace:packages/tiwi"]],\
+    ["@baqhub/tiwi-native", ["workspace:packages/tiwi-native"]],\
     ["baqhub", ["workspace:."]]\
   ],\
   "fallbackPool": [\
@@ -52,6 +57,19 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/tiwi/",\
         "packageDependencies": [\
           ["@baqhub/tiwi", "workspace:packages/tiwi"],\
+          ["tsconfig-to-dual-package", "virtual:824ad50160113824ce09282a0e212484d2065bcfe49d55b996716b3b2c1d5d0781f2b54393739f53fd3f32d3fff7f47b340833ec23e1004abc4c21d5a27c7eab#npm:1.2.0"],\
+          ["tslib", "npm:2.8.1"],\
+          ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
+          ["vitest", "virtual:28a3b42add2c462f25029e8605467cc8854806df10aedb182d8356898f159d8c6e6526142b40870a19fca1725d5b4e34e41538e35883dd53da2f7fdf4a263e15#npm:2.1.4"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@baqhub/tiwi-native", [\
+      ["workspace:packages/tiwi-native", {\
+        "packageLocation": "./packages/tiwi-native/",\
+        "packageDependencies": [\
+          ["@baqhub/tiwi-native", "workspace:packages/tiwi-native"],\
           ["tsconfig-to-dual-package", "virtual:824ad50160113824ce09282a0e212484d2065bcfe49d55b996716b3b2c1d5d0781f2b54393739f53fd3f32d3fff7f47b340833ec23e1004abc4c21d5a27c7eab#npm:1.2.0"],\
           ["tslib", "npm:2.8.1"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
