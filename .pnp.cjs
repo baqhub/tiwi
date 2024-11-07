@@ -13,11 +13,16 @@ const RAW_RUNTIME_STATE =
     {\
       "name": "baqhub",\
       "reference": "workspace:."\
+    },\
+    {\
+      "name": "@baqhub/tiwi",\
+      "reference": "workspace:packages/tiwi"\
     }\
   ],\
   "enableTopLevelFallback": true,\
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
+    ["@baqhub/tiwi", ["workspace:packages/tiwi"]],\
     ["baqhub", ["workspace:."]]\
   ],\
   "fallbackPool": [\
@@ -36,6 +41,19 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.3.3"],\
           ["prettier-plugin-organize-imports", "virtual:28a3b42add2c462f25029e8605467cc8854806df10aedb182d8356898f159d8c6e6526142b40870a19fca1725d5b4e34e41538e35883dd53da2f7fdf4a263e15#npm:4.1.0"],\
           ["prettier-plugin-tailwindcss", "virtual:28a3b42add2c462f25029e8605467cc8854806df10aedb182d8356898f159d8c6e6526142b40870a19fca1725d5b4e34e41538e35883dd53da2f7fdf4a263e15#npm:0.6.8"],\
+          ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
+          ["vitest", "virtual:28a3b42add2c462f25029e8605467cc8854806df10aedb182d8356898f159d8c6e6526142b40870a19fca1725d5b4e34e41538e35883dd53da2f7fdf4a263e15#npm:2.1.4"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@baqhub/tiwi", [\
+      ["workspace:packages/tiwi", {\
+        "packageLocation": "./packages/tiwi/",\
+        "packageDependencies": [\
+          ["@baqhub/tiwi", "workspace:packages/tiwi"],\
+          ["tsconfig-to-dual-package", "virtual:824ad50160113824ce09282a0e212484d2065bcfe49d55b996716b3b2c1d5d0781f2b54393739f53fd3f32d3fff7f47b340833ec23e1004abc4c21d5a27c7eab#npm:1.2.0"],\
+          ["tslib", "npm:2.8.1"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
           ["vitest", "virtual:28a3b42add2c462f25029e8605467cc8854806df10aedb182d8356898f159d8c6e6526142b40870a19fca1725d5b4e34e41538e35883dd53da2f7fdf4a263e15#npm:2.1.4"]\
         ],\
@@ -2747,6 +2765,28 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["resolve-tsconfig", [\
+      ["npm:1.3.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/resolve-tsconfig-npm-1.3.0-fcd6b64822-10c0.zip/node_modules/resolve-tsconfig/",\
+        "packageDependencies": [\
+          ["resolve-tsconfig", "npm:1.3.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:f84feae828c005301442fe9fc339589c73865c3dc370f380ca04a3ed8fa9200e07ed7b1c17ddd4fced2b7e45d42350d8a15aacf10a537f2bbdc9bdff34a481f8#npm:1.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/resolve-tsconfig-virtual-5ca9ebd5a7/4/.yarn/berry/cache/resolve-tsconfig-npm-1.3.0-fcd6b64822-10c0.zip/node_modules/resolve-tsconfig/",\
+        "packageDependencies": [\
+          ["resolve-tsconfig", "virtual:f84feae828c005301442fe9fc339589c73865c3dc370f380ca04a3ed8fa9200e07ed7b1c17ddd4fced2b7e45d42350d8a15aacf10a537f2bbdc9bdff34a481f8#npm:1.3.0"],\
+          ["@types/typescript", null],\
+          ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"]\
+        ],\
+        "packagePeers": [\
+          "@types/typescript",\
+          "typescript"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["retry", [\
       ["npm:0.12.0", {\
         "packageLocation": "../../../.yarn/berry/cache/retry-npm-0.12.0-72ac7fb4cc-10c0.zip/node_modules/retry/",\
@@ -3112,6 +3152,29 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["ts-api-utils", "virtual:2619c67e95a5bbac205750806d2e2ce508567232ecaf10a8ee4b49ef2ae52ef5fe323dd72e6c5fc9cf6183914ed03e4b69d72afcfc57b60b43ab77a86c14da32#npm:1.4.0"],\
           ["@types/typescript", null],\
+          ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"]\
+        ],\
+        "packagePeers": [\
+          "@types/typescript",\
+          "typescript"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tsconfig-to-dual-package", [\
+      ["npm:1.2.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/tsconfig-to-dual-package-npm-1.2.0-a98ab4a366-10c0.zip/node_modules/tsconfig-to-dual-package/",\
+        "packageDependencies": [\
+          ["tsconfig-to-dual-package", "npm:1.2.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:824ad50160113824ce09282a0e212484d2065bcfe49d55b996716b3b2c1d5d0781f2b54393739f53fd3f32d3fff7f47b340833ec23e1004abc4c21d5a27c7eab#npm:1.2.0", {\
+        "packageLocation": "./.yarn/__virtual__/tsconfig-to-dual-package-virtual-f84feae828/4/.yarn/berry/cache/tsconfig-to-dual-package-npm-1.2.0-a98ab4a366-10c0.zip/node_modules/tsconfig-to-dual-package/",\
+        "packageDependencies": [\
+          ["tsconfig-to-dual-package", "virtual:824ad50160113824ce09282a0e212484d2065bcfe49d55b996716b3b2c1d5d0781f2b54393739f53fd3f32d3fff7f47b340833ec23e1004abc4c21d5a27c7eab#npm:1.2.0"],\
+          ["@types/typescript", null],\
+          ["resolve-tsconfig", "virtual:f84feae828c005301442fe9fc339589c73865c3dc370f380ca04a3ed8fa9200e07ed7b1c17ddd4fced2b7e45d42350d8a15aacf10a537f2bbdc9bdff34a481f8#npm:1.3.0"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"]\
         ],\
         "packagePeers": [\
