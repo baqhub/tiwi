@@ -42,7 +42,7 @@
     "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@types/react": "^18",
+    "@types/react": "^18.3.12",
     "tsconfig-to-dual-package": "1.2.0",
     "typescript": "5.6.3",
     "vitest": "2.1.4"

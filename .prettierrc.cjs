@@ -24,11 +24,7 @@ const config = {
   trailingComma: "es5",
   tailwindFunctions: ["tw"],
   tailwindPreserveWhitespace: true,
-  plugins: [
-    absRequire.resolve("prettier-plugin-organize-imports"),
-    // absRequire.resolve("prettier-plugin-tailwindcss"),
-    "../../prettier-plugin-tailwindcss/dist/index.mjs",
-  ],
+  plugins: [absRequire.resolve("prettier-plugin-organize-imports")],
 };
 
 module.exports = config;

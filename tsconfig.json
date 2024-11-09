@@ -8,10 +8,10 @@
   "include": [],
   "references": [
     {
-      "path": "packages/tiwi-native"
+      "path": "packages/tiwi"
     },
     {
-      "path": "packages/tiwi"
+      "path": "packages/tiwi-native"
     }
   ]
 }
