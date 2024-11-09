@@ -204,4 +204,189 @@ describe("Variants", () => {
       />
     `);
   });
+
+  test("Multi variants with no overlap", () => {
+    // Prepare.
+    const Header = tiwi.header`
+      text-amber-200
+
+      ${{
+        large: `
+          p-20
+        `,
+        red: `
+          bg-red-400
+        `,
+      }}
+    `;
+
+    // Act.
+    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithSingleVariant = renderNode(<Header variants="large" />);
+    const actualWithAllVariants = renderNode(
+      <Header variants={["large", "red"]} />
+    );
+
+    // Assert.
+    expect(actualWithoutVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200"
+      />
+    `);
+    expect(actualWithSingleVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200 p-20"
+      />
+    `);
+    expect(actualWithAllVariants).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200 p-20 bg-red-400"
+      />
+    `);
+  });
+
+  test("Multi variants with overlap", () => {
+    // Prepare.
+    const Header = tiwi.header`
+      text-amber-200
+
+      ${{
+        color1: `
+          text-amber-300
+        `,
+        color2: `
+          text-amber-400
+        `,
+      }}
+    `;
+
+    // Act.
+    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithSingleVariant = renderNode(<Header variants="color1" />);
+    const actualWithAllVariants = renderNode(
+      <Header variants={["color1", "color2"]} />
+    );
+
+    // Assert.
+    expect(actualWithoutVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200"
+      />
+    `);
+    expect(actualWithSingleVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-300"
+      />
+    `);
+    expect(actualWithAllVariants).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-400"
+      />
+    `);
+  });
+
+  test("Multi variants overwrite order", () => {
+    // Prepare.
+    const Header = tiwi.header`
+      text-amber-200
+
+      ${{
+        color1: `
+          text-amber-300
+        `,
+      }}
+
+      text-amber-400
+
+      ${{
+        color2: `
+          text-amber-500
+        `,
+      }}
+    `;
+
+    // Act.
+    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithVariant1 = renderNode(<Header variants="color1" />);
+    const actualWithVariant2 = renderNode(<Header variants="color2" />);
+
+    // Assert.
+    expect(actualWithoutVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-400"
+      />
+    `);
+    expect(actualWithVariant1).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-400"
+      />
+    `);
+    expect(actualWithVariant2).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-500"
+      />
+    `);
+  });
+
+  test("Explicit variant types", () => {
+    // Prepare.
+    type Variants = "small" | "large";
+    const Header = tiwi.header<Variants>`
+      text-amber-200
+
+      p-0
+      ${{
+        small: `p-2`,
+        large: `p-3`,
+      }}
+    `;
+
+    // Act.
+    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithVariant1 = renderNode(<Header variants="small" />);
+    const actualWithVariant2 = renderNode(<Header variants="large" />);
+
+    // Assert.
+    expect(actualWithoutVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200 p-0"
+      />
+    `);
+    expect(actualWithVariant1).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200 p-2"
+      />
+    `);
+    expect(actualWithVariant2).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200 p-3"
+      />
+    `);
+  });
+
+  test("Accept object with more properties", () => {
+    // Prepare.
+    const props = {
+      isDisabled: true,
+      isFocused: true,
+    };
+
+    const Header = tiwi.header`
+      text-amber-200
+
+      ${{
+        isDisabled: `text-amber-300`,
+      }}
+    `;
+
+    // Act.
+    const actual = renderNode(<Header variants={props} />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-300"
+      />
+    `);
+  });
 });
