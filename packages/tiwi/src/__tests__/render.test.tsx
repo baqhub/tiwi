@@ -1,5 +1,5 @@
 import {render} from "@testing-library/react";
-import {ReactNode} from "react";
+import {FC, ReactNode} from "react";
 import {describe, expect, test} from "vitest";
 import tiwi from "../tiwi.js";
 
@@ -8,7 +8,7 @@ function renderNode(element: ReactNode) {
   return container.firstChild;
 }
 
-describe("Basic function", () => {
+describe("Basic function with intrinsic elements", () => {
   test("Render intrinsic with no class", () => {
     // Prepare.
     const Header = tiwi.header``;
@@ -101,6 +101,56 @@ describe("Basic function", () => {
       <header
         class="text-amber-200 custom-header"
       />
+    `);
+  });
+
+  test("Render intrinsic with inheritance", () => {
+    // Prepare.
+    const Header = tiwi.header`
+      text-amber-200
+    `;
+
+    const BigHeader = tiwi(Header)`
+      text-lg
+    `;
+
+    // Act.
+    const actual = renderNode(<BigHeader />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200 text-lg"
+      />
+    `);
+  });
+});
+
+describe("Basic function with custom component", () => {
+  interface MyComponentProps {
+    className?: string;
+    isDisabled?: boolean;
+  }
+
+  const MyComponent: FC<MyComponentProps> = props => {
+    const {className, isDisabled} = props;
+    return (
+      <div className={className}>{isDisabled ? "disabled" : "enabled"}</div>
+    );
+  };
+
+  test("Render with no class", () => {
+    // Prepare.
+    const StyledComponent = tiwi(MyComponent)``;
+
+    // Act.
+    const actual = renderNode(<StyledComponent />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <div>
+        enabled
+      </div>
     `);
   });
 });
@@ -386,6 +436,62 @@ describe("Variants", () => {
     expect(actual).toMatchInlineSnapshot(`
       <header
         class="text-amber-300"
+      />
+    `);
+  });
+
+  test("Variants with inheritance", () => {
+    // Prepare.
+    const Header = tiwi.header`
+      text-amber-200
+
+      ${{
+        isDisabled: `text-amber-300`,
+      }}
+    `;
+
+    const TopHeader = tiwi(Header)`
+      text-lg
+    `;
+
+    // Act.
+    const actual = renderNode(<TopHeader variants="isDisabled" />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-300 text-lg"
+      />
+    `);
+  });
+
+  test("Variants with inheritance and more variants", () => {
+    // Prepare.
+    const Header = tiwi.header`
+      text-amber-200
+
+      ${{
+        isDisabled: `text-amber-300`,
+      }}
+    `;
+
+    const TopHeader = tiwi(Header)`
+      text-lg
+
+      ${{
+        isFocused: `bg-red-100`,
+      }}
+    `;
+
+    // Act.
+    const actual = renderNode(
+      <TopHeader variants={["isFocused", "isDisabled"]} />
+    );
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-300 text-lg bg-red-100"
       />
     `);
   });

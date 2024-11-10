@@ -1,5 +1,6 @@
 import {
   ComponentProps,
+  ComponentRef,
   ElementType,
   forwardRef,
   useEffect,
@@ -10,8 +11,10 @@ import {twMerge} from "tailwind-merge";
 import {allIntrinsicElements} from "./elements.js";
 import {
   IntrinsicElementsBuilderMap,
+  PropsWithoutVariants,
   Tiwi,
   TiwiComponentProps,
+  TiwiExoticComponent,
   TiwiFunction,
   TiwiProps,
   TiwiVariants,
@@ -78,69 +81,90 @@ function useVariantsMemo<TValue, T extends string>(
 // Component factory.
 //
 
+const tiwiComponentSymbol = Symbol("TiwiComponent");
+
+function isTiwiComponent(
+  Element: ElementType<any>
+): Element is TiwiExoticComponent<any, any, any> {
+  return Element && (Element as any)[tiwiComponentSymbol] === true;
+}
+
 const tiwiBase: TiwiFunction = <E extends ElementType<TiwiProps>>(
   Element: E
 ) => {
+  type TVariant = E extends TiwiExoticComponent<any, any, infer T> ? T : string;
+
   return <T extends string>(
     classNames: TemplateStringsArray,
     ...variantDefinitions: TiwiVariants<T>[]
   ) => {
-    type Props = ComponentProps<E>;
-    type RefType = E extends abstract new (...args: any) => any ? E : never;
+    type Props = PropsWithoutVariants<ComponentProps<E>>;
+    type Ref = ComponentRef<E>;
+    // type RefType = E extends abstract new (...args: any) => any ? E : never;
     const AnyElement = Element as any;
 
-    const component = forwardRef<
-      InstanceType<RefType>,
-      Props & TiwiComponentProps<T>
-    >((props, ref) => {
-      const {className, variants, ...otherProps} = props;
+    const component = forwardRef<Ref, Props & TiwiComponentProps<T | TVariant>>(
+      (props, ref) => {
+        const {className, variants, ...otherProps} = props;
 
-      const requestedVariants = useVariantsMemo((): ReadonlySet<string> => {
-        if (!variants) {
-          return new Set();
-        }
-
-        if (typeof variants === "string") {
-          return new Set([variants]);
-        }
-
-        if (Array.isArray(variants)) {
-          return new Set(variants);
-        }
-
-        return new Set(
-          Object.keys(variants).filter(k => (variants as any)[k] === true)
-        );
-      }, variants);
-
-      const mergedClassName = useMemo(() => {
-        const allClassNames = classNames.reduce((list, current, index) => {
-          const variantDefinition = variantDefinitions[index - 1];
-
-          if (variantDefinition) {
-            Object.keys(variantDefinition)
-              .filter(v => requestedVariants.has(v))
-              .forEach(v => {
-                const variantValue = variantDefinition[v as T];
-                if (!variantValue) {
-                  return;
-                }
-
-                list.push(variantValue);
-              });
+        const requestedVariants = useVariantsMemo((): ReadonlySet<string> => {
+          if (!variants) {
+            return new Set();
           }
 
-          list.push(current);
-          return list;
-        }, [] as string[]);
+          if (typeof variants === "string") {
+            return new Set([variants]);
+          }
 
-        return twMerge([...allClassNames, className]) || undefined;
-      }, [className, requestedVariants]);
+          if (Array.isArray(variants)) {
+            return new Set(variants);
+          }
 
-      return (
-        <AnyElement ref={ref} className={mergedClassName} {...otherProps} />
-      );
-    });
+          return new Set(
+            Object.keys(variants).filter(k => (variants as any)[k] === true)
+          );
+        }, variants);
+
+        const mergedClassName = useMemo(() => {
+          const allClassNames = classNames.reduce((list, current, index) => {
+            const variantDefinition = variantDefinitions[index - 1];
+
+            if (variantDefinition) {
+              Object.keys(variantDefinition)
+                .filter(v => requestedVariants.has(v))
+                .forEach(v => {
+                  const variantValue = variantDefinition[v as T];
+                  if (!variantValue) {
+                    return;
+                  }
+
+                  list.push(variantValue);
+                });
+            }
+
+            list.push(current);
+            return list;
+          }, [] as string[]);
+
+          return twMerge([...allClassNames, className]) || undefined;
+        }, [className, requestedVariants]);
+
+        if (isTiwiComponent(Element)) {
+          return (
+            <AnyElement
+              {...otherProps}
+              ref={ref}
+              className={mergedClassName}
+              variants={variants}
+            />
+          );
+        }
+
+        return (
+          <AnyElement {...otherProps} ref={ref} className={mergedClassName} />
+        );
+      }
+    );
 
     if (typeof Element === "string") {
       component.displayName = `tiwi.${Element}`;
@@ -149,6 +173,7 @@ const tiwiBase: TiwiFunction = <E extends ElementType<TiwiProps>>(
         Element.displayName || Element.name || "tiwi.Component";
     }
 
+    (component as any)[tiwiComponentSymbol] = true;
     return component;
   };
 };

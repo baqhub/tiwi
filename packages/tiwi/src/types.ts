@@ -4,9 +4,7 @@ import {
   ElementRef,
   ElementType,
   ExoticComponent,
-  ForwardRefExoticComponent,
   PropsWithoutRef,
-  PropsWithRef,
   RefAttributes,
 } from "react";
 
@@ -30,10 +28,16 @@ type TiwiVariantsMap<T extends string> = {
   [K in T]?: boolean;
 };
 
+export type IsUnion<T, U extends T = T> = (
+  T extends any ? (U extends T ? false : true) : never
+) extends false
+  ? false
+  : true;
+
 export type TiwiVariantsProp<T extends string> =
-  | T
-  | ReadonlyArray<T>
   | TiwiVariantsMap<T>
+  | ReadonlyArray<T>
+  | T
   | false
   | null
   | undefined;
@@ -42,17 +46,34 @@ export interface TiwiComponentProps<T extends string> {
   variants?: TiwiVariantsProp<T>;
 }
 
+export type PropsWithoutVariants<P> = P extends any
+  ? "variants" extends keyof P
+    ? Omit<P, "variants">
+    : P
+  : P;
+
 //
 // Function.
 //
 
-export interface TiwiBuilder<P extends object, R> {
+export type TiwiExoticComponent<
+  TProps extends object,
+  TRef,
+  TVariant extends string,
+> = ExoticComponent<
+  PropsWithoutRef<PropsWithoutVariants<TProps> & TiwiComponentProps<TVariant>> &
+    RefAttributes<TRef>
+>;
+
+export interface TiwiBuilder<
+  TProps extends object,
+  TRef,
+  TVariant extends string = never,
+> {
   <T extends string>(
     classNames: TemplateStringsArray,
     ...variantDefinitions: TiwiVariants<T>[]
-  ): ExoticComponent<
-    PropsWithoutRef<P & TiwiComponentProps<T>> & RefAttributes<R>
-  >;
+  ): TiwiExoticComponent<TProps, TRef, T | TVariant>;
 }
 
 export interface TiwiFunction {
@@ -60,7 +81,9 @@ export interface TiwiFunction {
     Element: E
   ): TiwiBuilder<
     ComponentProps<E>,
-    InstanceType<E extends abstract new (...args: any) => any ? E : never>
+    ComponentRef<E>,
+    // InstanceType<E extends abstract new (...args: any) => any ? E : never>,
+    E extends TiwiExoticComponent<any, any, infer T> ? T : string
   >;
 }
 
