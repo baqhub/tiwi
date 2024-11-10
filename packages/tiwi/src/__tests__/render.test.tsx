@@ -1,12 +1,53 @@
-import {render} from "@testing-library/react";
-import {FC, ReactNode} from "react";
+import {act, render} from "@testing-library/react";
+import {Component, FC, ReactNode, useEffect, useRef} from "react";
 import {describe, expect, test} from "vitest";
 import tiwi from "../tiwi.js";
 
 function renderNode(element: ReactNode) {
-  const {container} = render(element);
-  return container.firstChild;
+  const {asFragment} = render(element);
+  return asFragment().firstChild;
 }
+
+describe("Meta function", () => {
+  test("Forward ref", async () => {
+    // Prepare.
+    const Header = tiwi.header``;
+    let refValue: HTMLElement | null | undefined;
+
+    const Component: FC = () => {
+      const ref = useRef<HTMLElement>(null);
+      useEffect(() => {
+        refValue = ref.current;
+      });
+      return <Header ref={ref} />;
+    };
+
+    // Act.
+    renderNode(<Component />);
+
+    // Assert.
+    await act(async () => {
+      expect(refValue).toBeTruthy();
+      expect(refValue?.localName).toBe("header");
+    });
+  });
+
+  test("Set correct DisplayName", () => {
+    // Prepare.
+    const Header = tiwi.header``;
+    const Link = tiwi.a``;
+    const H1 = tiwi.h1``;
+
+    const MyComponent: FC = () => <>Hello</>;
+    const StyledComponent = tiwi(MyComponent)``;
+
+    // Assert.
+    expect(Header.displayName).toBe("tiwi.header");
+    expect(Link.displayName).toBe("tiwi.a");
+    expect(H1.displayName).toBe("tiwi.h1");
+    expect(StyledComponent.displayName).toBe("tiwi(MyComponent)");
+  });
+});
 
 describe("Basic function with intrinsic elements", () => {
   test("Render intrinsic with no class", () => {
@@ -126,7 +167,7 @@ describe("Basic function with intrinsic elements", () => {
   });
 });
 
-describe("Basic function with custom component", () => {
+describe("Basic function with function component", () => {
   interface MyComponentProps {
     className?: string;
     isDisabled?: boolean;
@@ -138,6 +179,101 @@ describe("Basic function with custom component", () => {
       <div className={className}>{isDisabled ? "disabled" : "enabled"}</div>
     );
   };
+
+  test("Render with no style", () => {
+    // Prepare.
+    const StyledComponent = tiwi(MyComponent)``;
+
+    // Act.
+    const actual = renderNode(<StyledComponent />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <div>
+        enabled
+      </div>
+    `);
+  });
+
+  test("Render with style", () => {
+    // Prepare.
+    const StyledComponent = tiwi(MyComponent)`
+      text-amber-300
+    `;
+
+    // Act.
+    const actual = renderNode(<StyledComponent />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <div
+        class="text-amber-300"
+      >
+        enabled
+      </div>
+    `);
+  });
+
+  test("Render with component prop", () => {
+    // Prepare.
+    const StyledComponent = tiwi(MyComponent)`
+      text-amber-300
+    `;
+
+    // Act.
+    const actual = renderNode(<StyledComponent isDisabled />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <div
+        class="text-amber-300"
+      >
+        disabled
+      </div>
+    `);
+  });
+
+  test("Render with component prop and variant", () => {
+    // Prepare.
+    const StyledComponent = tiwi(MyComponent)`
+      text-amber-300
+
+      ${{
+        isDisabled: `text-amber-100`,
+      }}
+    `;
+
+    // Act.
+    const isDisabled = true;
+    const actual = renderNode(
+      <StyledComponent variants={{isDisabled}} isDisabled={isDisabled} />
+    );
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <div
+        class="text-amber-100"
+      >
+        disabled
+      </div>
+    `);
+  });
+});
+
+describe("Basic function with class component", () => {
+  interface MyComponentProps {
+    className?: string;
+    isDisabled?: boolean;
+  }
+
+  class MyComponent extends Component<MyComponentProps> {
+    render() {
+      const {className, isDisabled} = this.props;
+      return (
+        <div className={className}>{isDisabled ? "disabled" : "enabled"}</div>
+      );
+    }
+  }
 
   test("Render with no style", () => {
     // Prepare.

@@ -168,8 +168,8 @@ const tiwiBase: TiwiFunction = <E extends ElementType<TiwiProps>>(
     if (typeof Element === "string") {
       component.displayName = `tiwi.${Element}`;
     } else {
-      component.displayName =
-        Element.displayName || Element.name || "tiwi.Component";
+      const name = Element.displayName || Element.name || "";
+      component.displayName = `tiwi(${name})`;
     }
 
     (component as any)[tiwiComponentSymbol] = true;

@@ -3,7 +3,7 @@ import {
   ComponentRef,
   ElementRef,
   ElementType,
-  ExoticComponent,
+  NamedExoticComponent,
   PropsWithoutRef,
   RefAttributes,
 } from "react";
@@ -60,7 +60,7 @@ export type TiwiExoticComponent<
   TProps extends object,
   TRef,
   TVariant extends string,
-> = ExoticComponent<
+> = NamedExoticComponent<
   PropsWithoutRef<PropsWithoutVariants<TProps> & TiwiComponentProps<TVariant>> &
     RefAttributes<TRef>
 >;
