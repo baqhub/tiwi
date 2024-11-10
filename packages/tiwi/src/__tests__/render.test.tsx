@@ -139,7 +139,7 @@ describe("Basic function with custom component", () => {
     );
   };
 
-  test("Render with no class", () => {
+  test("Render with no style", () => {
     // Prepare.
     const StyledComponent = tiwi(MyComponent)``;
 
@@ -150,6 +150,70 @@ describe("Basic function with custom component", () => {
     expect(actual).toMatchInlineSnapshot(`
       <div>
         enabled
+      </div>
+    `);
+  });
+
+  test("Render with style", () => {
+    // Prepare.
+    const StyledComponent = tiwi(MyComponent)`
+      text-amber-300
+    `;
+
+    // Act.
+    const actual = renderNode(<StyledComponent />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <div
+        class="text-amber-300"
+      >
+        enabled
+      </div>
+    `);
+  });
+
+  test("Render with component prop", () => {
+    // Prepare.
+    const StyledComponent = tiwi(MyComponent)`
+      text-amber-300
+    `;
+
+    // Act.
+    const actual = renderNode(<StyledComponent isDisabled />);
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <div
+        class="text-amber-300"
+      >
+        disabled
+      </div>
+    `);
+  });
+
+  test("Render with component prop and variant", () => {
+    // Prepare.
+    const StyledComponent = tiwi(MyComponent)`
+      text-amber-300
+
+      ${{
+        isDisabled: `text-amber-100`,
+      }}
+    `;
+
+    // Act.
+    const isDisabled = true;
+    const actual = renderNode(
+      <StyledComponent variants={{isDisabled}} isDisabled={isDisabled} />
+    );
+
+    // Assert.
+    expect(actual).toMatchInlineSnapshot(`
+      <div
+        class="text-amber-100"
+      >
+        disabled
       </div>
     `);
   });
@@ -315,6 +379,50 @@ describe("Variants", () => {
     const actualWithSingleVariant = renderNode(<Header variants="color1" />);
     const actualWithAllVariants = renderNode(
       <Header variants={["color1", "color2"]} />
+    );
+
+    // Assert.
+    expect(actualWithoutVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200"
+      />
+    `);
+    expect(actualWithSingleVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-300"
+      />
+    `);
+    expect(actualWithAllVariants).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-400"
+      />
+    `);
+  });
+
+  test("Multi variants with map", () => {
+    // Prepare.
+    const Header = tiwi.header`
+      text-amber-200
+
+      ${{
+        color1: `
+          text-amber-300
+        `,
+        color2: `
+          text-amber-400
+        `,
+      }}
+    `;
+
+    // Act.
+    const actualWithoutVariant = renderNode(
+      <Header variants={{color1: false, color2: false}} />
+    );
+    const actualWithSingleVariant = renderNode(
+      <Header variants={{color1: true, color2: false}} />
+    );
+    const actualWithAllVariants = renderNode(
+      <Header variants={{color1: true, color2: true}} />
     );
 
     // Assert.

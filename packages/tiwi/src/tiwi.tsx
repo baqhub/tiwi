@@ -100,7 +100,6 @@ const tiwiBase: TiwiFunction = <E extends ElementType<TiwiProps>>(
   ) => {
     type Props = PropsWithoutVariants<ComponentProps<E>>;
     type Ref = ComponentRef<E>;
-    // type RefType = E extends abstract new (...args: any) => any ? E : never;
     const AnyElement = Element as any;
 
     const component = forwardRef<Ref, Props & TiwiComponentProps<T | TVariant>>(

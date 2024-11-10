@@ -82,7 +82,6 @@ export interface TiwiFunction {
   ): TiwiBuilder<
     ComponentProps<E>,
     ComponentRef<E>,
-    // InstanceType<E extends abstract new (...args: any) => any ? E : never>,
     E extends TiwiExoticComponent<any, any, infer T> ? T : string
   >;
 }
