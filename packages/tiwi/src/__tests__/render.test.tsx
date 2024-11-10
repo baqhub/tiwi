@@ -38,7 +38,7 @@ describe("Meta function", () => {
     const Link = tiwi.a``;
     const H1 = tiwi.h1``;
 
-    const MyComponent: FC = () => <>Hello</>;
+    const MyComponent: FC<{className?: string}> = () => <>Hello</>;
     const StyledComponent = tiwi(MyComponent)``;
 
     // Assert.

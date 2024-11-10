@@ -76,9 +76,19 @@ export interface TiwiBuilder<
   ): TiwiExoticComponent<TProps, TRef, T | TVariant>;
 }
 
+// Ensure the props of Element actually extend TiwiProps.
+export type ElementWithTiwiProps<E> =
+  E extends ElementType<infer Props>
+    ? keyof Props extends never
+      ? never
+      : Props extends TiwiProps
+        ? E
+        : never
+    : never;
+
 export interface TiwiFunction {
-  <E extends ElementType<TiwiProps>>(
-    Element: E
+  <E extends ElementType>(
+    Element: ElementWithTiwiProps<E>
   ): TiwiBuilder<
     ComponentProps<E>,
     ComponentRef<E>,

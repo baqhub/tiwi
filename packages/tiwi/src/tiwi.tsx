@@ -10,13 +10,13 @@ import {
 import {twMerge} from "tailwind-merge";
 import {allIntrinsicElements} from "./elements.js";
 import {
+  ElementWithTiwiProps,
   IntrinsicElementsBuilderMap,
   PropsWithoutVariants,
   Tiwi,
   TiwiComponentProps,
   TiwiExoticComponent,
   TiwiFunction,
-  TiwiProps,
   TiwiVariants,
   TiwiVariantsProp,
 } from "./types.js";
@@ -89,8 +89,8 @@ function isTiwiComponent(
   return Element && (Element as any)[tiwiComponentSymbol] === true;
 }
 
-const tiwiBase: TiwiFunction = <E extends ElementType<TiwiProps>>(
-  Element: E
+const tiwiBase: TiwiFunction = <E extends ElementType>(
+  Element: ElementWithTiwiProps<E>
 ) => {
   type TVariant = E extends TiwiExoticComponent<any, any, infer T> ? T : string;
 
@@ -186,7 +186,7 @@ const intrinsicElementsFunctions = allIntrinsicElements.reduce(
     result: IntrinsicElementsBuilderMap,
     DomElement: K
   ) => {
-    result[DomElement] = tiwiBase(DomElement) as any;
+    result[DomElement] = (tiwiBase as any)(DomElement);
     return result;
   },
   {} as IntrinsicElementsBuilderMap
