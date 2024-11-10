@@ -101,6 +101,7 @@ const tiwiBase: TiwiFunction = <E extends ElementType>(
     type Props = PropsWithoutVariants<ComponentProps<E>>;
     type Ref = ComponentRef<E>;
     const AnyElement = Element as any;
+    const isTiwi = isTiwiComponent(Element);
 
     const component = forwardRef<Ref, Props & TiwiComponentProps<T | TVariant>>(
       (props, ref) => {
@@ -146,9 +147,12 @@ const tiwiBase: TiwiFunction = <E extends ElementType>(
           }, [] as string[]);
 
           return twMerge([...allClassNames, className]) || undefined;
-        }, [className, requestedVariants]);
 
-        if (isTiwiComponent(Element)) {
+          // Refresh on parent variables to make fast-refresh work in RN.
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [classNames, variantDefinitions, className, requestedVariants]);
+
+        if (isTiwi) {
           return (
             <AnyElement
               {...otherProps}
