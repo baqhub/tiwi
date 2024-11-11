@@ -31,6 +31,10 @@ const Layout = tiwi.div<TooltipVariant>`
   }}
 `;
 
+const MegaLayout = tiwi(Layout)`
+  bg-red-300
+`;
+
 const Icon = tiwi.div`
   w-5
   h-5
