@@ -3,15 +3,11 @@
     "./tsconfig.base"
   ],
   "compilerOptions": {
-    "outDir": "./build"
+    "outDir": "./build/esm",
+    "baseUrl": "./src",
+    "declaration": true
   },
-  "include": [],
-  "references": [
-    {
-      "path": "packages/tiwi"
-    },
-    {
-      "path": "packages/tiwi-native"
-    }
-  ]
+  "include": [
+    "src"
+  ],
 }

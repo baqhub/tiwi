@@ -1,45 +1,56 @@
 {
-  "name": "baqhub",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "ts": "tsc --build --watch",
-    "build": "tsc --build",
-    "lint": "eslint \"packages/**/*.{ts,tsx,js,cjs}\"",
-    "test": "yarn workspace @baqhub/sdk vitest run && yarn workspace @baqhub/cli vitest run && yarn workspace @baqhub/ui vitest run && yarn workspace @baqhub/messages-web vitest run",
-    "pretty": "prettier --check ./packages/**/src/**/*.{js,ts,jsx,tsx,json}",
-    "pretty:write": "prettier --write ./packages/**/src/**/*.{js,ts,jsx,tsx,json}"
-  },
-  "author": "Baqhub",
+  "name": "tiwi",
+  "version": "0.1.0",
   "license": "MIT",
+  "description": "The official JavaScript SDK for the BAQ federated app platform.",
+  "author": "Baqhub",
+  "homepage": "https://baq.dev/",
+  "bugs": "https://github.com/baqhub/baq/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baqhub/tiwi.git",
+    "directory": "packages/tiwi"
+  },
   "keywords": [
     "baq",
     "baqhub",
     "sdk",
-    "cli",
     "federated",
     "javascript",
-    "typescript",
-    "react",
-    "react-native"
+    "typescript"
   ],
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
-  "private": true,
-  "packageManager": "yarn@4.5.1",
+  "sideEffects": false,
+  "scripts": {
+    "ts": "tsc --build --watch ./tsconfig.cjs.json ./tsconfig.json",
+    "build": "tsc --build ./tsconfig.cjs.json ./tsconfig.json && tsconfig-to-dual-package",
+    "build:clean": "rm -rf ./build",
+    "publish": "yarn npm publish",
+    "test": "vitest"
+  },
+  "module": "./build/esm/src/index.js",
+  "main": "./build/cjs/src/index.js",
+  "types": "./build/cjs/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./build/esm/src/index.js",
+      "require": "./build/cjs/src/index.js"
+    }
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "tailwind-merge": "^2.5.4",
+    "tslib": "^2.8.1"
+  },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "8.13.0",
-    "@typescript-eslint/parser": "8.13.0",
-    "eslint": "8.57.1",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react-hooks": "5.0.0",
-    "globals": "15.12.0",
-    "prettier": "3.3.3",
-    "prettier-plugin-organize-imports": "4.1.0",
-    "prettier-plugin-tailwindcss": "0.6.8",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/react": "16.0.1",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "jsdom": "25.0.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "3.4.14",
+    "tsconfig-to-dual-package": "1.2.0",
     "typescript": "5.6.3",
     "vitest": "2.1.4"
   }
