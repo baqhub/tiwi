@@ -185,17 +185,25 @@ const tiwiBase: TiwiFunction = <E extends ElementType>(
 // Add intrinsic components to function.
 //
 
-const intrinsicElementsFunctions = allIntrinsicElements.reduce(
-  <K extends keyof JSX.IntrinsicElements>(
-    result: IntrinsicElementsBuilderMap,
-    DomElement: K
-  ) => {
-    result[DomElement] = (tiwiBase as any)(DomElement);
-    return result;
-  },
-  {} as IntrinsicElementsBuilderMap
-);
+function buildTiwi(): Tiwi {
+  if (typeof navigator === "object" && navigator.product === "ReactNative") {
+    return tiwiBase as Tiwi;
+  }
 
-export const tiwi: Tiwi = Object.assign(tiwiBase, intrinsicElementsFunctions);
+  const intrinsicElementsFunctions = allIntrinsicElements.reduce(
+    <K extends keyof JSX.IntrinsicElements>(
+      result: IntrinsicElementsBuilderMap,
+      DomElement: K
+    ) => {
+      result[DomElement] = (tiwiBase as any)(DomElement);
+      return result;
+    },
+    {} as IntrinsicElementsBuilderMap
+  );
+
+  return Object.assign(tiwiBase, intrinsicElementsFunctions);
+}
+
+export const tiwi = buildTiwi();
 export const tw = tiwi;
 export default tiwi;
