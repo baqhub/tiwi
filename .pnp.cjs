@@ -47,7 +47,6 @@ const RAW_RUNTIME_STATE =
           ["tailwind-merge", "npm:2.5.4"],\
           ["tailwindcss", "npm:3.4.14"],\
           ["tsconfig-to-dual-package", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:1.2.0"],\
-          ["tslib", "npm:2.8.1"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
           ["vitest", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:2.1.4"]\
         ],\
@@ -4148,7 +4147,6 @@ const RAW_RUNTIME_STATE =
           ["tailwind-merge", "npm:2.5.4"],\
           ["tailwindcss", "npm:3.4.14"],\
           ["tsconfig-to-dual-package", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:1.2.0"],\
-          ["tslib", "npm:2.8.1"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
           ["vitest", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:2.1.4"]\
         ],\

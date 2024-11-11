@@ -17,7 +17,7 @@
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "importHelpers": true,
+    "importHelpers": false,
     "jsx": "react-jsx",
     "useUnknownInCatchVariables": true,
     "noFallthroughCasesInSwitch": true,
