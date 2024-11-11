@@ -205,5 +205,3 @@ function buildTiwi(): Tiwi {
 }
 
 export const tiwi = buildTiwi();
-export const tw = tiwi;
-export default tiwi;

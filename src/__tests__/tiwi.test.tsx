@@ -1,7 +1,7 @@
 import {act, render} from "@testing-library/react";
 import {Component, FC, ReactNode, useEffect, useRef} from "react";
 import {describe, expect, test} from "vitest";
-import tiwi from "../tiwi.js";
+import {tiwi} from "../tiwi.js";
 
 function renderNode(element: ReactNode) {
   const {asFragment} = render(element);

@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren, ReactNode} from "react";
-import tiwi from "./tiwi.js";
+import {tiwi} from "./tiwi.js";
 
 //
 // Props.

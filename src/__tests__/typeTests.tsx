@@ -1,5 +1,5 @@
 import {FC} from "react";
-import tiwi from "../tiwi.js";
+import {tiwi} from "../tiwi.js";
 
 // Find props on intrinsic element.
 {

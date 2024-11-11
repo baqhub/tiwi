@@ -67,6 +67,9 @@ export interface TiwiExoticComponent<
       RefAttributes<TRef>
   > {}
 
+export type VariantsOf<T extends TiwiExoticComponent<any, any, any>> =
+  T extends TiwiExoticComponent<any, any, infer TVariants> ? TVariants : never;
+
 export interface TiwiBuilder<
   TProps extends object,
   TRef,
