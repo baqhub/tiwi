@@ -89,6 +89,10 @@ function isTiwiComponent(
   return Element && (Element as any)[tiwiComponentSymbol] === true;
 }
 
+function isString(source: any): source is string {
+  return typeof source === "string";
+}
+
 const tiwiBase: TiwiFunction = <E extends ElementType>(
   Element: ElementWithTiwiProps<E>
 ) => {
@@ -117,7 +121,7 @@ const tiwiBase: TiwiFunction = <E extends ElementType>(
           }
 
           if (Array.isArray(variants)) {
-            return new Set(variants);
+            return new Set(variants.filter(isString));
           }
 
           return new Set(

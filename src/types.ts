@@ -36,7 +36,7 @@ export type IsUnion<T, U extends T = T> = (
 
 export type TiwiVariantsProp<T extends string> =
   | TiwiVariantsMap<T>
-  | ReadonlyArray<T>
+  | ReadonlyArray<T | undefined>
   | T
   | false
   | null

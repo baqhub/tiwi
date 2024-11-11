@@ -480,6 +480,9 @@ describe("Variants", () => {
     // Act.
     const actualWithoutVariant = renderNode(<Header variants={false} />);
     const actualWithSingleVariant = renderNode(<Header variants="large" />);
+    const actualWithSingleAndUndefined = renderNode(
+      <Header variants={["large", undefined]} />
+    );
     const actualWithAllVariants = renderNode(
       <Header variants={["large", "red"]} />
     );
@@ -491,6 +494,11 @@ describe("Variants", () => {
       />
     `);
     expect(actualWithSingleVariant).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-200 p-20"
+      />
+    `);
+    expect(actualWithSingleAndUndefined).toMatchInlineSnapshot(`
       <header
         class="text-amber-200 p-20"
       />
