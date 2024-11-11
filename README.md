@@ -100,7 +100,7 @@ const RedButton = tiwi(Button)`
 // <button class="rounded bg-red-300" />
 ```
 
-Any component with a `className` prop can be extended:
+Any component with a `className` prop can be styled:
 
 ```tsx
 const SubmitButton: FC<{className?: string}> = props => {
@@ -121,7 +121,7 @@ const RedSubmitButton = tiwi(SubmitButton)`
 
 ## Variants
 
-What makes Tiwi so powerful is its support for variants. This enables changes to be made to the style of a component along multiple dimensions without creating every permutation separately.
+What makes Tiwi so powerful is the built-in support for variants. It enables the style of a component to be changed along multiple dimensions without creating every permutation separately.
 
 Here's a simple variant to support multiple sizes:
 
@@ -144,7 +144,7 @@ const SizeButton = tiwi.button`
 `;
 ```
 
-The variants to use can then be provided in different ways:
+The desired variants can be provided in different ways:
 
 ```tsx
 <SizeButton />;
@@ -167,7 +167,7 @@ If multiple variants overlap, the last one to be declared wins:
 <SizeButton variants={["large", "medium"]} />;
 <SizeButton variants={{medium: true, large: true}} />;
 
-// Both render as:
+// All render as:
 // <button class="m-1 p-5 text-xl" />
 ```
 
@@ -209,7 +209,7 @@ const FlexButton = tiwi.button`
 // <button class="p-3 text-lg bg-red-300" />
 ```
 
-Variants can directly match some of a component's props:
+Variants can directly match some of the component's props:
 
 ```tsx
 const Button = tiwi.button`
@@ -275,13 +275,12 @@ const SizeButton = tiwi.button`
   }}
 `;
 
-type Variants = VariantsOf<typeof SizeButton>;
-// This equals: "medium" | "large".
+type Variants = VariantsOf<typeof SizeButton>; // "medium" | "large".
 ```
 
 ## React Native
 
-Tiwi is compatible with React Native. It requires [NativeWind](https://www.nativewind.dev/) to be [setup](https://www.nativewind.dev/getting-started/react-native) first.
+Tiwi is compatible with React Native. It requires [NativeWind](https://www.nativewind.dev/) to be installed.
 
 React Native elements can then be styled in the same way:
 
