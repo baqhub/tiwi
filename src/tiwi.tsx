@@ -17,6 +17,7 @@ import {
   TiwiComponentProps,
   TiwiExoticComponent,
   TiwiFunction,
+  TiwiProps,
   TiwiVariants,
   TiwiVariantsProp,
 } from "./types.js";
@@ -89,8 +90,12 @@ function isTiwiComponent(
   return Element && (Element as any)[tiwiComponentSymbol] === true;
 }
 
-function isString(source: any): source is string {
-  return typeof source === "string";
+function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+
+interface IntermediateProps<T extends string> extends TiwiProps {
+  variants?: TiwiVariantsProp<T>;
 }
 
 const tiwiBase: TiwiFunction = <E extends ElementType>(
@@ -109,7 +114,8 @@ const tiwiBase: TiwiFunction = <E extends ElementType>(
 
     const component = forwardRef<Ref, Props & TiwiComponentProps<T | TVariant>>(
       (props, ref) => {
-        const {className, variants, ...otherProps} = props;
+        const {className, variants, ...otherProps} =
+          props as IntermediateProps<T>;
 
         const requestedVariants = useVariantsMemo((): ReadonlySet<string> => {
           if (!variants) {
