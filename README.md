@@ -160,10 +160,11 @@ The variants to use can then be provided in different ways:
 // <button class="m-1 p-3 text-lg" />
 ```
 
-If multiple variants overlap, the last one wins:
+If multiple variants overlap, the last one to be declared wins:
 
 ```tsx
 <SizeButton variants={["medium", "large"]} />;
+<SizeButton variants={["large", "medium"]} />;
 <SizeButton variants={{medium: true, large: true}} />;
 
 // Both render as:
@@ -208,7 +209,98 @@ const FlexButton = tiwi.button`
 // <button class="p-3 text-lg bg-red-300" />
 ```
 
+Variants can directly match some of a component's props:
+
+```tsx
+const Button = tiwi.button`
+  bg-blue-500
+
+  ${{
+    isDisabled: `bg-neutral-200`,
+  }}
+`;
+
+const MyComponent: FC<{isDisabled?: boolean}> = props => {
+  return <Button variants={props}>Continue</Button>;
+};
+```
+
+Base style and variants can be declared in any order:
+
+```tsx
+const FlexButton = tiwi.button`
+  text-normal
+  ${{
+    medium: `text-lg`,
+    large: `text-xl`,
+  }}
+
+  bg-blue-300
+  ${{
+    primary: `bg-green-300`,
+    critical: `bg-red-300`,
+  }}
+`;
+```
+
+## TypeScript
+
+Tiwi is fully compatible with TypeScript and both props and variants are strongly typed automatically.
+
+On top of that, an explicit variant type can be provided:
+
+```tsx
+type Size = "small" | "medium";
+
+const SizeButton = tiwi.button<Size>`
+  text-normal
+  ${{medium: `text-medium`}}
+`;
+
+const MyComponent: FC<{size?: Size}> = props => {
+  return <SizeButton variants={size}>Press me!</SizeButton>;
+};
+```
+
+The opposite (extracting the variants type) is also possible:
+
+```tsx
+import tiwi, {VariantsOf} from "tiwi";
+
+const SizeButton = tiwi.button`
+  text-normal
+  ${{
+    medium: `text-medium`,
+    large: `text-large`,
+  }}
+`;
+
+type Variants = VariantsOf<typeof SizeButton>;
+// This equals: "medium" | "large".
+```
+
 ## React Native
+
+Tiwi is compatible with React Native. It requires [NativeWind](https://www.nativewind.dev/) to be [setup](https://www.nativewind.dev/getting-started/react-native) first.
+
+React Native elements can then be styled in the same way:
+
+```tsx
+import {View, Text} from "react-native";
+import tiwi from "tiwi";
+
+const Avatar = tiwi(View)`
+  w-10
+  h-10
+
+  rounded-full
+`;
+
+const Title = tiwi(Text)`
+  text-neutral-900
+  dark:text-white
+`;
+```
 
 ## Full example
 
