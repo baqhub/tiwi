@@ -4,12 +4,11 @@
   "license": "MIT",
   "description": "The official JavaScript SDK for the BAQ federated app platform.",
   "author": "Baqhub",
-  "homepage": "https://baq.dev/",
-  "bugs": "https://github.com/baqhub/baq/issues",
+  "homepage": "https://github.com/baqhub/tiwi",
+  "bugs": "https://github.com/baqhub/tiwi/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/baqhub/tiwi.git",
-    "directory": "packages/tiwi"
+    "url": "https://github.com/baqhub/tiwi.git"
   },
   "keywords": [
     "baq",
@@ -28,13 +27,13 @@
     "publish": "yarn npm publish",
     "test": "vitest"
   },
-  "module": "./build/esm/src/index.js",
-  "main": "./build/cjs/src/index.js",
-  "types": "./build/cjs/src/index.d.ts",
+  "module": "./build/esm/src/tiwi.js",
+  "main": "./build/cjs/src/tiwi.js",
+  "types": "./build/cjs/src/tiwi.d.ts",
   "exports": {
     ".": {
-      "import": "./build/esm/src/index.js",
-      "require": "./build/cjs/src/index.js"
+      "import": "./build/esm/src/tiwi.js",
+      "require": "./build/cjs/src/tiwi.js"
     }
   },
   "dependencies": {

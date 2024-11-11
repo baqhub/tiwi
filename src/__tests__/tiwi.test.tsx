@@ -369,10 +369,12 @@ describe("Variants", () => {
     `;
 
     // Act.
+    // @ts-expect-error missing variants prop.
     const actual1 = renderNode(<Header />);
-    const actual2 = renderNode(<Header variants={[]} />);
-    const actual3 = renderNode(<Header variants={{}} />);
-    const actual4 = renderNode(<Header variants={{isDisabled: false}} />);
+    const actual2 = renderNode(<Header variants={false} />);
+    const actual3 = renderNode(<Header variants={[]} />);
+    const actual4 = renderNode(<Header variants={{}} />);
+    const actual5 = renderNode(<Header variants={{isDisabled: false}} />);
 
     // Assert.
     expect(actual1).toMatchInlineSnapshot(`
@@ -391,6 +393,11 @@ describe("Variants", () => {
       />
     `);
     expect(actual4).toMatchInlineSnapshot(`
+      <header
+        class="text-amber-500"
+      />
+    `);
+    expect(actual5).toMatchInlineSnapshot(`
       <header
         class="text-amber-500"
       />
@@ -443,7 +450,7 @@ describe("Variants", () => {
     `;
 
     // Act.
-    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithoutVariant = renderNode(<Header variants={false} />);
     const actualWithVariant = renderNode(<Header variants="isDisabled" />);
 
     // Assert.
@@ -471,7 +478,7 @@ describe("Variants", () => {
     `;
 
     // Act.
-    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithoutVariant = renderNode(<Header variants={false} />);
     const actualWithSingleVariant = renderNode(<Header variants="large" />);
     const actualWithAllVariants = renderNode(
       <Header variants={["large", "red"]} />
@@ -511,7 +518,7 @@ describe("Variants", () => {
     `;
 
     // Act.
-    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithoutVariant = renderNode(<Header variants={false} />);
     const actualWithSingleVariant = renderNode(<Header variants="color1" />);
     const actualWithAllVariants = renderNode(
       <Header variants={["color1", "color2"]} />
@@ -600,7 +607,7 @@ describe("Variants", () => {
     `;
 
     // Act.
-    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithoutVariant = renderNode(<Header variants={false} />);
     const actualWithVariant1 = renderNode(<Header variants="color1" />);
     const actualWithVariant2 = renderNode(<Header variants="color2" />);
 
@@ -636,7 +643,7 @@ describe("Variants", () => {
     `;
 
     // Act.
-    const actualWithoutVariant = renderNode(<Header />);
+    const actualWithoutVariant = renderNode(<Header variants={false} />);
     const actualWithVariant1 = renderNode(<Header variants="small" />);
     const actualWithVariant2 = renderNode(<Header variants="large" />);
 

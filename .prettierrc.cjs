@@ -1,5 +1,3 @@
-console.log("Loading config.");
-
 const {existsSync} = require("fs");
 const {createRequire} = require("module");
 const {resolve} = require("path");

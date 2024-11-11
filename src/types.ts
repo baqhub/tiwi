@@ -42,9 +42,9 @@ export type TiwiVariantsProp<T extends string> =
   | null
   | undefined;
 
-export interface TiwiComponentProps<T extends string> {
-  variants?: TiwiVariantsProp<T>;
-}
+export type TiwiComponentProps<T extends string> = [T] extends [never]
+  ? {}
+  : {variants: TiwiVariantsProp<T>};
 
 export type PropsWithoutVariants<P> = P extends any
   ? "variants" extends keyof P
@@ -56,21 +56,23 @@ export type PropsWithoutVariants<P> = P extends any
 // Function.
 //
 
-export type TiwiExoticComponent<
+export interface TiwiExoticComponent<
   TProps extends object,
   TRef,
   TVariant extends string,
-> = NamedExoticComponent<
-  PropsWithoutRef<PropsWithoutVariants<TProps> & TiwiComponentProps<TVariant>> &
-    RefAttributes<TRef>
->;
+> extends NamedExoticComponent<
+    PropsWithoutRef<
+      PropsWithoutVariants<TProps> & TiwiComponentProps<TVariant>
+    > &
+      RefAttributes<TRef>
+  > {}
 
 export interface TiwiBuilder<
   TProps extends object,
   TRef,
   TVariant extends string = never,
 > {
-  <T extends string>(
+  <T extends string = never>(
     classNames: TemplateStringsArray,
     ...variantDefinitions: TiwiVariants<T>[]
   ): TiwiExoticComponent<TProps, TRef, T | TVariant>;
@@ -92,7 +94,7 @@ export interface TiwiFunction {
   ): TiwiBuilder<
     ComponentProps<E>,
     ComponentRef<E>,
-    E extends TiwiExoticComponent<any, any, infer T> ? T : string
+    E extends TiwiExoticComponent<any, any, infer T> ? T : never
   >;
 }
 

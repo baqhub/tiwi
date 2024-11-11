@@ -92,9 +92,9 @@ function isTiwiComponent(
 const tiwiBase: TiwiFunction = <E extends ElementType>(
   Element: ElementWithTiwiProps<E>
 ) => {
-  type TVariant = E extends TiwiExoticComponent<any, any, infer T> ? T : string;
+  type TVariant = E extends TiwiExoticComponent<any, any, infer T> ? T : never;
 
-  return <T extends string>(
+  return <T extends string = never>(
     classNames: TemplateStringsArray,
     ...variantDefinitions: TiwiVariants<T>[]
   ) => {
