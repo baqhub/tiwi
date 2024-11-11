@@ -147,14 +147,14 @@ const SizeButton = tiwi.button`
 The variants to use can then be provided in different ways:
 
 ```tsx
-<SizeButton />
+<SizeButton />;
 
 // Renders as:
 // <button class="m-1 p-2 text-normal" />
 
-<SizeButton variants="medium" />
-<SizeButton variants={["medium"]} />
-<SizeButton variants={{medium: true}} />
+<SizeButton variants="medium" />;
+<SizeButton variants={["medium"]} />;
+<SizeButton variants={{medium: true}} />;
 
 // All render as:
 // <button class="m-1 p-3 text-lg" />
@@ -163,8 +163,8 @@ The variants to use can then be provided in different ways:
 If multiple variants overlap, the last one wins:
 
 ```tsx
-<SizeButton variants={["medium", "large"]} />
-<SizeButton variants={{medium: true, large: true}} />
+<SizeButton variants={["medium", "large"]} />;
+<SizeButton variants={{medium: true, large: true}} />;
 
 // Both render as:
 // <button class="m-1 p-5 text-xl" />
@@ -201,8 +201,8 @@ const FlexButton = tiwi.button`
 ```
 
 ```tsx
-<FlexButton variants={["medium", "critical"]} />
-<FlexButton variants={{medium: true, critical: true}} />
+<FlexButton variants={["medium", "critical"]} />;
+<FlexButton variants={{medium: true, critical: true}} />;
 
 // Both render as:
 // <button class="p-3 text-lg bg-red-300" />
