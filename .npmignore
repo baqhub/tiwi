@@ -1,4 +1,14 @@
 .DS_Store
-/vitest.config.*
-/tsconfig*
+/.github
+/.vscode
+/.yarn
+/.editorconfig
+/.eslintrc.cjs
+/.node-version
+/.pnp*
+/.prettierrc.cjs
+/.yarnrc.yml
 /src
+/tailwind*
+/tsconfig*
+/vitest*

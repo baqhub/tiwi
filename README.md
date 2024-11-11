@@ -1,8 +1,17 @@
-# tiwi &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/baqhub/tiwi/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@baqhub/sdk.svg?color=)](https://www.npmjs.com/package/tiwi)
+# tiwi &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/baqhub/tiwi/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/tiwi.svg?color=)](https://www.npmjs.com/package/tiwi)
 
 Tiwi is a [React](https://react.dev/) library that makes it easy to create components with [Tailwind](https://tailwindcss.com/) styles baked in. This makes it straightforward to preserve the separation of concern between structure and style, similar to [styled-components](https://styled-components.com/). It also comes with a powerful variants system for more advanced use cases.
 
-This library works with both React on the web and [React Native](https://reactnative.dev/).
+This library works with both React on the web and [React Native](#react-native).
+
+- [Getting started](#getting-started)
+- [Basic usage](#basic-usage)
+- [Variants](#variants)
+- [TypeScript](#typescript)
+- [React Native](#react-native)
+- [Full example](#full-example)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
 
 ## Getting started
 
