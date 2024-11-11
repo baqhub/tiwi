@@ -28,12 +28,6 @@ type TiwiVariantsMap<T extends string> = {
   [K in T]?: boolean;
 };
 
-export type IsUnion<T, U extends T = T> = (
-  T extends any ? (U extends T ? false : true) : never
-) extends false
-  ? false
-  : true;
-
 export type TiwiVariantsProp<T extends string> =
   | TiwiVariantsMap<T>
   | ReadonlyArray<T | undefined>
@@ -56,6 +50,8 @@ export type PropsWithoutVariants<P> = P extends any
 // Function.
 //
 
+export const tiwiComponentSymbol: unique symbol = Symbol("TiwiComponent");
+
 export interface TiwiExoticComponent<
   TProps extends object,
   TRef,
@@ -65,7 +61,9 @@ export interface TiwiExoticComponent<
       PropsWithoutVariants<TProps> & TiwiComponentProps<TVariant>
     > &
       RefAttributes<TRef>
-  > {}
+  > {
+  [tiwiComponentSymbol]: true;
+}
 
 export type VariantsOf<T extends TiwiExoticComponent<any, any, any>> =
   T extends TiwiExoticComponent<any, any, infer TVariants> ? TVariants : never;

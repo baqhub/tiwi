@@ -15,6 +15,7 @@ import {
   PropsWithoutVariants,
   Tiwi,
   TiwiComponentProps,
+  tiwiComponentSymbol,
   TiwiExoticComponent,
   TiwiFunction,
   TiwiProps,
@@ -81,8 +82,6 @@ function useVariantsMemo<TValue, T extends string>(
 //
 // Component factory.
 //
-
-const tiwiComponentSymbol = Symbol("TiwiComponent");
 
 function isTiwiComponent(
   Element: ElementType<any>
@@ -177,16 +176,18 @@ const tiwiBase: TiwiFunction = <E extends ElementType>(
           <AnyElement {...otherProps} ref={ref} className={mergedClassName} />
         );
       }
-    );
+    ) as TiwiExoticComponent<ComponentProps<E>, Ref, T | TVariant>;
 
-    if (typeof Element === "string") {
-      component.displayName = `tiwi.${Element}`;
-    } else {
+    component[tiwiComponentSymbol] = true;
+    component.displayName = (() => {
+      if (typeof Element === "string") {
+        return (component.displayName = `tiwi.${Element}`);
+      }
+
       const name = Element.displayName || Element.name || "";
-      component.displayName = `tiwi(${name})`;
-    }
+      return (component.displayName = `tiwi(${name})`);
+    })();
 
-    (component as any)[tiwiComponentSymbol] = true;
     return component;
   };
 };
