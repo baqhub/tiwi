@@ -42,6 +42,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.3.3"],\
           ["prettier-plugin-organize-imports", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:4.1.0"],\
           ["prettier-plugin-tailwindcss", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:0.6.8"],\
+          ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:18.3.1"],\
           ["tailwind-merge", "npm:2.5.4"],\
           ["tailwindcss", "npm:3.4.14"],\
@@ -745,7 +746,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
           ["@types/testing-library__dom", null],\
-          ["react", null],\
+          ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:18.3.1"]\
         ],\
         "packagePeers": [\
@@ -3544,6 +3545,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["react", [\
+      ["npm:18.3.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/react-npm-18.3.1-af38f3c1ae-10c0.zip/node_modules/react/",\
+        "packageDependencies": [\
+          ["react", "npm:18.3.1"],\
+          ["loose-envify", "npm:1.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["react-dom", [\
       ["npm:18.3.1", {\
         "packageLocation": "../../../.yarn/berry/cache/react-dom-npm-18.3.1-a805663f38-10c0.zip/node_modules/react-dom/",\
@@ -3558,7 +3569,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:18.3.1"],\
           ["@types/react", "npm:18.3.12"],\
           ["loose-envify", "npm:1.4.0"],\
-          ["react", null],\
+          ["react", "npm:18.3.1"],\
           ["scheduler", "npm:0.23.2"]\
         ],\
         "packagePeers": [\
@@ -4131,6 +4142,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.3.3"],\
           ["prettier-plugin-organize-imports", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:4.1.0"],\
           ["prettier-plugin-tailwindcss", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:0.6.8"],\
+          ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:ef6c9e696fb83860874f8033bc932b044e0af94d4dc5e5fdd3e21f8f82472a8e8395051519e833c004d30e8fd35e3191de492d52e1cc1701bd681a485b91f547#npm:18.3.1"],\
           ["tailwind-merge", "npm:2.5.4"],\
           ["tailwindcss", "npm:3.4.14"],\
