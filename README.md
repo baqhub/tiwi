@@ -298,9 +298,7 @@ import {View, Text} from "react-native";
 import tiwi from "tiwi";
 
 const Avatar = tiwi(View)`
-  w-10
-  h-10
-
+  size-10
   rounded-full
 `;
 
@@ -349,8 +347,7 @@ const Layout = tiwi.div<TooltipVariant>`
 `;
 
 const Icon = tiwi.div`
-  w-5
-  h-5
+  size-5
 `;
 
 const Text = tiwi.div`
