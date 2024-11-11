@@ -8,7 +8,7 @@ on:
       - package.json
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
