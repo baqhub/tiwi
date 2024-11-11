@@ -1,4 +1,4 @@
-# tiwi &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/baqhub/tiwi/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@baqhub/sdk.svg?color=)](https://www.npmjs.com/package/tiwi)
+# Tiwi &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/baqhub/tiwi/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@baqhub/sdk.svg?color=)](https://www.npmjs.com/package/tiwi)
 
 Tiwi is a [React](https://react.dev/) library that makes it easy to create components with [Tailwind](https://tailwindcss.com/) styles baked in. This makes it straightforward to preserve the separation of concern between structure and style, similar to [styled-components](https://styled-components.com/). It also comes with a powerful variants system for more advanced use cases.
 
@@ -35,6 +35,89 @@ The following configuration will allow the extension to work with Tiwi:
 ```
 
 ## Basic usage
+
+Import Tiwi in your component file:
+
+```tsx
+import tiwi from "tiwi";
+```
+
+You can now create Tiwi components:
+
+```tsx
+const Button = tiwi.button`
+  rounded
+  bg-blue-300
+`;
+```
+
+These can be used like any other component:
+
+```tsx
+<Button />
+
+// Renders as:
+// <button class="rounded bg-blue-300" />
+```
+
+Classes can still be overridden inline:
+
+```tsx
+<Button className="bg-red-300" />
+
+// Renders as:
+// <button class="rounded bg-red-300" />
+```
+
+Other props work as expected:
+
+```tsx
+<Button type="submit">Submit</Button>
+
+// Renders as:
+// <button class="rounded bg-blue-300" type="submit">Submit</button>
+```
+
+Tiwi components can be further extended:
+
+```tsx
+const BigButton = tiwi(Button)`
+  text-lg
+`;
+
+// Renders as:
+// <button class="rounded bg-blue-300 text-lg" />
+```
+
+When extending, styles can be overwritten:
+
+```tsx
+const RedButton = tiwi(Button)`
+  bg-red-300
+`;
+
+// Renders as:
+// <button class="rounded bg-red-300" />
+```
+
+Any component with a `className` prop can be extended:
+
+```tsx
+const SubmitButton: FC<{className?: string}> = props => {
+  return (
+    <button className={props.className} type="submit">
+      Submit
+    </button>
+  );
+};
+
+const RedSubmitButton = tiwi(SubmitButton)`
+  bg-red-300
+`;
+
+// Renders as:
+// <button class="bg-red-300" type="submit">Submit</button>
+```
 
 ## Variants
 
