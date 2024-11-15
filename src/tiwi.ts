@@ -88,6 +88,7 @@ function buildTiwiBase(createElement: JSXFunction): TiwiFunction {
           props as IntermediateProps<T>;
 
         const flatVariants = variantsToArray(variants);
+        const flatVariantsString = flatVariants.join("::");
 
         const mergedClassName = useMemo(() => {
           const allClassNames = classNames.reduce((list, current, index) => {
@@ -114,7 +115,7 @@ function buildTiwiBase(createElement: JSXFunction): TiwiFunction {
 
           // Refresh on parent variables to make fast-refresh work in RN.
           // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [classNames, variantDefinitions, className, ...flatVariants]);
+        }, [classNames, variantDefinitions, className, flatVariantsString]);
 
         if (isTiwi) {
           return createElement(AnyElement, {
