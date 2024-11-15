@@ -1,8 +1,10 @@
 import {
   ComponentProps,
   ComponentRef,
+  ComponentType,
   ElementType,
   forwardRef,
+  ReactNode,
   useMemo,
 } from "react";
 import {twMerge} from "tailwind-merge";
@@ -59,22 +61,29 @@ interface IntermediateProps<T extends string> extends TiwiProps {
   variants?: TiwiVariantsProp<T>;
 }
 
-const tiwiBase: TiwiFunction = <E extends ElementType>(
-  Element: ElementWithTiwiProps<E>
-) => {
-  type TVariant = E extends TiwiExoticComponent<any, any, infer T> ? T : never;
+type JSXFunction = (
+  type: ComponentType,
+  props: Record<string, any> | undefined | null
+) => ReactNode;
 
-  return <T extends string = never>(
-    classNames: TemplateStringsArray,
-    ...variantDefinitions: TiwiVariants<T>[]
-  ) => {
-    type Props = PropsWithoutVariants<ComponentProps<E>>;
-    type Ref = ComponentRef<E>;
-    const AnyElement = Element as any;
-    const isTiwi = isTiwiComponent(Element);
+function buildTiwiBase(createElement: JSXFunction): TiwiFunction {
+  return <E extends ElementType>(Element: ElementWithTiwiProps<E>) => {
+    type TVariant =
+      E extends TiwiExoticComponent<any, any, infer T> ? T : never;
 
-    const component = forwardRef<Ref, Props & TiwiComponentProps<T | TVariant>>(
-      (props, ref) => {
+    return <T extends string = never>(
+      classNames: TemplateStringsArray,
+      ...variantDefinitions: TiwiVariants<T>[]
+    ) => {
+      type Props = PropsWithoutVariants<ComponentProps<E>>;
+      type Ref = ComponentRef<E>;
+      const AnyElement = Element as any;
+      const isTiwi = isTiwiComponent(Element);
+
+      const component = forwardRef<
+        Ref,
+        Props & TiwiComponentProps<T | TVariant>
+      >((props, ref) => {
         const {className, variants, ...otherProps} =
           props as IntermediateProps<T>;
 
@@ -108,41 +117,43 @@ const tiwiBase: TiwiFunction = <E extends ElementType>(
         }, [classNames, variantDefinitions, className, ...flatVariants]);
 
         if (isTiwi) {
-          return (
-            <AnyElement
-              {...otherProps}
-              ref={ref}
-              className={mergedClassName}
-              variants={variants}
-            />
-          );
+          return createElement(AnyElement, {
+            ...otherProps,
+            ref: ref,
+            className: mergedClassName,
+            variants: variants,
+          });
         }
 
-        return (
-          <AnyElement {...otherProps} ref={ref} className={mergedClassName} />
-        );
-      }
-    ) as TiwiExoticComponent<ComponentProps<E>, Ref, T | TVariant>;
+        return createElement(AnyElement, {
+          ...otherProps,
+          ref: ref,
+          className: mergedClassName,
+        });
+      }) as TiwiExoticComponent<ComponentProps<E>, Ref, T | TVariant>;
 
-    component[tiwiComponentSymbol] = true;
-    component.displayName = (() => {
-      if (typeof Element === "string") {
-        return (component.displayName = `tiwi.${Element}`);
-      }
+      component[tiwiComponentSymbol] = true;
+      component.displayName = (() => {
+        if (typeof Element === "string") {
+          return (component.displayName = `tiwi.${Element}`);
+        }
 
-      const name = Element.displayName || Element.name || "";
-      return (component.displayName = `tiwi(${name})`);
-    })();
+        const name = Element.displayName || Element.name || "";
+        return (component.displayName = `tiwi(${name})`);
+      })();
 
-    return component;
+      return component;
+    };
   };
-};
+}
 
 //
 // Add intrinsic components to function.
 //
 
-function buildTiwi(): Tiwi {
+export function buildTiwi(createElement: JSXFunction): Tiwi {
+  const tiwiBase = buildTiwiBase(createElement);
+
   if (typeof navigator === "object" && navigator.product === "ReactNative") {
     return tiwiBase as Tiwi;
   }
@@ -160,5 +171,3 @@ function buildTiwi(): Tiwi {
 
   return Object.assign(tiwiBase, intrinsicElementsFunctions);
 }
-
-export const tiwi = buildTiwi();
