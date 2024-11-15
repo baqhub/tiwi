@@ -54,7 +54,7 @@ import tiwi from "tiwi";
 You can now create Tiwi components:
 
 ```tsx
-const Header = tiwi.header`
+const Header = tiwi.h1`
   text-3xl
   text-blue-600
 `;
