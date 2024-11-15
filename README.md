@@ -267,7 +267,7 @@ const SizeButton = tiwi.button<Size>`
 `;
 
 const MyComponent: FC<{size?: Size}> = props => {
-  return <SizeButton variants={size}>Press me!</SizeButton>;
+  return <SizeButton variants={props.size}>Press me!</SizeButton>;
 };
 ```
 
