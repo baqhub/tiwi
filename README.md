@@ -54,6 +54,11 @@ import tiwi from "tiwi";
 You can now create Tiwi components:
 
 ```tsx
+const Header = tiwi.header`
+  text-3xl
+  text-blue-600
+`;
+
 const Button = tiwi.button`
   rounded
   bg-blue-300
