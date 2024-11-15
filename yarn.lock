@@ -3729,7 +3729,7 @@ __metadata:
     typescript: "npm:5.6.3"
     vitest: "npm:2.1.4"
   peerDependencies:
-    nativewind: ^4.0.0
+    nativewind: ^4.1.0
     react: ^17.0.0 || ^18.0.0
   peerDependenciesMeta:
     nativewind:
