@@ -1,7 +1,7 @@
 {
   "name": "tiwi",
   "license": "MIT",
-  "version": "1.0.10",
+  "version": "1.0.9",
   "description": "React library to create components with Tailwind styles baked in.",
   "author": "Baqhub",
   "homepage": "https://github.com/baqhub/tiwi",

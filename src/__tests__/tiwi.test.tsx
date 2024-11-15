@@ -1,5 +1,5 @@
 import {act, render} from "@testing-library/react";
-import React, {Component, FC, ReactNode, useEffect, useRef} from "react";
+import {Component, FC, ReactNode, useEffect, useRef} from "react";
 import {describe, expect, test} from "vitest";
 import {tiwi} from "../tiwi.js";
 
