@@ -1,7 +1,7 @@
 {
   "name": "tiwi",
   "license": "MIT",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "React library to create components with Tailwind styles baked in.",
   "author": "Baqhub",
   "homepage": "https://github.com/baqhub/tiwi",
@@ -32,6 +32,7 @@
   },
   "module": "./build/esm/src/index.js",
   "main": "./build/cjs/src/index.js",
+  "react-native": "./build/esm/src/index.native.js",
   "types": "./build/cjs/src/index.d.ts",
   "exports": {
     ".": {
@@ -44,7 +45,7 @@
     "tailwind-merge": "^2.5.4"
   },
   "peerDependencies": {
-    "nativewind": "^4.0.0",
+    "nativewind": "^4.1.0",
     "react": "^17.0.0 || ^18.0.0"
   },
   "peerDependenciesMeta": {
