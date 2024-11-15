@@ -1,4 +1,4 @@
-import {
+import React, {
   ComponentProps,
   ComponentRef,
   ElementType,
@@ -25,6 +25,10 @@ import {
 // Variants helpers.
 //
 
+function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+
 function variantsToArray<T extends string>(variants: TiwiVariantsProp<T>) {
   if (!variants) {
     return [];
@@ -49,10 +53,6 @@ function isTiwiComponent(
   Element: ElementType<any>
 ): Element is TiwiExoticComponent<any, any, any> {
   return Element && (Element as any)[tiwiComponentSymbol] === true;
-}
-
-function isString(value: unknown): value is string {
-  return typeof value === "string";
 }
 
 interface IntermediateProps<T extends string> extends TiwiProps {
