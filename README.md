@@ -2,7 +2,46 @@
 
 Tiwi is a [React](https://react.dev/) library that makes it easy to create components with [Tailwind](https://tailwindcss.com/) styles baked in. This makes it straightforward to preserve the separation of concern between structure and style, similar to [styled-components](https://styled-components.com/). It also comes with a powerful variants system for more advanced use cases.
 
-This library works with both React on the web and [React Native](#react-native).
+Tiwi was made to power [BAQ](https://baq.dev).
+
+```tsx
+// Don't write this:
+<div className=`p-2 rounded bg-neutral-100 hover:bg-white shadow-md ${isUrgent ? "shadow-red-200" : "shadow-neutral-200"}`>
+  <a className="text-md text-green-400 font-semibold" href={url}>Open in new window</a>
+</div>;
+
+// Write this instead:
+const Card = tiwi.div`
+  p-2
+  bg-neutral-100
+  hover:bg-white
+
+  shadow-md
+  shadow-neutral-200
+  ${{
+    isUrgent: `shadow-red-200`
+  }}
+`;
+
+const CardLink = tiwi.a`
+  text-md
+  text-green-400
+  font-semibold
+`
+
+<Card variants={{isUrgent}}>
+  <CardLink href={url}>Open in new window</Card>
+</Card>;
+```
+
+### Highlights
+
+✅ Works with React on the web, SSR, and React Native.<br>
+✅ Full TypeScript compatibility.<br>
+✅ Extend existing components.<br>
+✅ Flexible variants system.
+
+### Table of contents
 
 - [Getting started](#getting-started)
 - [Basic usage](#basic-usage)
