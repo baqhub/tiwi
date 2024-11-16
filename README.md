@@ -10,7 +10,10 @@ Tiwi was made to power [BAQ](https://baq.dev).
   <a className="text-md text-green-400 font-semibold" href={url}>Open in new window</a>
 </div>;
 
+//
 // Write this instead:
+//
+
 const Card = tiwi.div`
   p-2
   bg-neutral-100
@@ -19,7 +22,7 @@ const Card = tiwi.div`
   shadow-md
   shadow-neutral-200
   ${{
-    isUrgent: `shadow-red-200`
+    isUrgent: `shadow-red-200`,
   }}
 `;
 
@@ -27,10 +30,10 @@ const CardLink = tiwi.a`
   text-md
   text-green-400
   font-semibold
-`
+`;
 
 <Card variants={{isUrgent}}>
-  <CardLink href={url}>Open in new window</Card>
+  <CardLink href={url}>Open in new window</CardLink>
 </Card>;
 ```
 
