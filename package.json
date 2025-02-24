@@ -1,7 +1,7 @@
 {
   "name": "tiwi",
   "license": "MIT",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "React library to create components with Tailwind styles baked in.",
   "author": "Baqhub",
   "homepage": "https://github.com/baqhub/tiwi",
@@ -42,11 +42,11 @@
     }
   },
   "dependencies": {
-    "tailwind-merge": "^2.5.4"
+    "tailwind-merge": "^3.0.2"
   },
   "peerDependencies": {
     "nativewind": "^4.1.0",
-    "react": "^17.0.0 || ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0"
   },
   "peerDependenciesMeta": {
     "nativewind": {
@@ -55,26 +55,27 @@
   },
   "devDependencies": {
     "@testing-library/dom": "10.4.0",
-    "@testing-library/react": "16.0.1",
-    "@types/react": "18.3.12",
-    "@types/react-dom": "18.3.1",
-    "@typescript-eslint/eslint-plugin": "8.13.0",
-    "@typescript-eslint/parser": "8.13.0",
+    "@testing-library/react": "16.2.0",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "@typescript-eslint/eslint-plugin": "8.24.1",
+    "@typescript-eslint/parser": "8.24.1",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react-hooks": "5.0.0",
-    "globals": "15.12.0",
-    "jsdom": "25.0.1",
+    "eslint-plugin-prettier": "5.2.3",
+    "eslint-plugin-react-hooks": "5.1.0",
+    "globals": "16.0.0",
+    "jsdom": "26.0.0",
     "nativewind": "4.1.23",
-    "prettier": "3.3.3",
+    "prettier": "3.5.2",
     "prettier-plugin-organize-imports": "4.1.0",
-    "prettier-plugin-tailwindcss": "0.6.8",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "tailwindcss": "3.4.14",
+    "prettier-plugin-tailwindcss": "0.6.11",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "tailwindcss": "4.0.8",
     "tsconfig-to-dual-package": "1.2.0",
-    "typescript": "5.6.3",
-    "vitest": "2.1.4"
-  }
+    "typescript": "5.7.3",
+    "vitest": "3.0.6"
+  },
+  "packageManager": "yarn@4.6.0"
 }

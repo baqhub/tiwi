@@ -1,8 +1,8 @@
 import {
   ComponentProps,
   ComponentRef,
-  ElementRef,
   ElementType,
+  JSX,
   NamedExoticComponent,
   PropsWithoutRef,
   RefAttributes,
@@ -102,7 +102,7 @@ export interface TiwiFunction {
 export type IntrinsicElementsBuilderMap = {
   [K in keyof JSX.IntrinsicElements]: TiwiBuilder<
     JSX.IntrinsicElements[K],
-    ElementRef<K>
+    ComponentRef<K>
   >;
 };
 

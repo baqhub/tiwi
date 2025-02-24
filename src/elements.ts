@@ -1,3 +1,5 @@
+import {JSX} from "react";
+
 type AllIntrinsicElements = ReadonlyArray<keyof JSX.IntrinsicElements>;
 
 export const allIntrinsicElements: AllIntrinsicElements = [

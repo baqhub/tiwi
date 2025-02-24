@@ -4,6 +4,7 @@ import {
   ComponentType,
   ElementType,
   forwardRef,
+  JSX,
   ReactNode,
   useMemo,
 } from "react";
