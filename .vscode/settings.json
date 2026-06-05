@@ -1,10 +1,19 @@
 {
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  },
   "files.autoSave": "onFocusChange",
-  "typescript.preferences.importModuleSpecifier": "project-relative",
-  "typescript.preferences.useAliasesForRenames": false,
-  "javascript.preferences.useAliasesForRenames": false,
+  "oxc.typeAware": true,
+  "oxc.fmt.configPath": "./vite.config.ts",
+  "oxc.path.oxfmt": ".vscode/oxfmt-with-vp-version.sh",
+  "oxc.path.oxlint": "node_modules/vite-plus/bin/oxlint",
+  "oxc.path.tsgolint": "node_modules/.bin/tsgolint",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.preferences.importModuleSpecifierEnding": "js",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
   "mdx.server.enable": false,
   "[mdx][md]": {
     "editor.wordWrap": "on"
@@ -12,32 +21,9 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "tailwindCSS.experimental.classRegex": [
-    // "tw`([^`]*)", // tw`...`
-    // "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
-    // "tiwi\\.[^`]+`([^`]*)`", // tiwi.xxx<xxx>`...`
-    // "tw\\(.*?\\).*?`([^`]*)", // tw(Component)<xxx>`...`,
-    // [
-    //   "tw\\.[^`]+.*?([^;]*)`",
-    //   "[\"'`\\}]([^\"'`\\$]*).*?[\"'`\\$]"
-    // ],
-    [
-      "(?:tiwi|tw)[.(][^`]+([^;]*)",
-      "[\"'`\\}]([^\"'`\\$]*)[\"'`\\$]"
-    ]
-    // [
-    //   "tw\\(.*?\\).*?([^;]*)",
-    //   "[\"'`\\}]([^\"'`\\$]*).*?[\"'`\\$]"
-    // ],
-    // [
-    //   "tiwi\\(.*?\\).*?([^;]*)",
-    //   "[\"'`\\}]([^\"'`\\$]*).*?[\"'`\\$]"
-    // ]
-  ],
+  "tailwindCSS.classFunctions": ["tw", "tiwi", "tiwi\\.[a-z-]+"],
   "movets.skipWarning": true,
   "files.exclude": {
-    "**/.yarn/cache": true,
-    "**/.yarn/plugins": true,
     "**/.yarn/releases": true,
     "**/.yarn/unplugged": true,
     "**/.yarn/install-state.gz": true,
@@ -49,16 +35,8 @@
     "**/out": true
   },
   "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
+    "**/.yarn": true
   },
-  "eslint.nodePath": ".yarn/sdks",
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.enableFiletypes": [
-    "mdx"
-  ],
   "cSpell.words": [
     "abortable",
     "baqhub",
@@ -77,20 +55,27 @@
     "Linkify",
     "marsidev",
     "mathilde",
-    "nativewind",
+    "oxfmt",
+    "oxlint",
     "pipeable",
     "pressable",
     "proxied",
     "proxying",
     "quentez",
     "rehype",
+    "rolldown",
     "svgr",
     "tailwindcss",
     "tanstack",
     "tiwi",
+    "tsdown",
+    "tsgolint",
     "typeof",
     "unfollow",
     "unicity",
-    "unoptimized"
+    "uniwind",
+    "unoptimized",
+    "viteplus",
+    "voidzero"
   ]
 }

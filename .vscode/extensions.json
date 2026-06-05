@@ -1,7 +1,7 @@
 {
   "recommendations": [
-    "arcanis.vscode-zipfs",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "VoidZero.vite-plus-extension-pack",
+    "bradlc.vscode-tailwindcss",
+    "streetsidesoftware.code-spell-checker"
   ]
 }

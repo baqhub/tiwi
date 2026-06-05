@@ -1,81 +1,81 @@
 {
   "name": "tiwi",
-  "license": "MIT",
-  "version": "1.0.15",
+  "version": "2.0.0",
   "description": "React library to create components with Tailwind styles baked in.",
-  "author": "Baqhub",
+  "keywords": [
+    "baqhub",
+    "css",
+    "javascript",
+    "react",
+    "react-native",
+    "style",
+    "tailwind",
+    "typescript",
+    "variants"
+  ],
   "homepage": "https://github.com/baqhub/tiwi",
   "bugs": "https://github.com/baqhub/tiwi/issues",
+  "license": "MIT",
+  "author": "Baqhub",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/baqhub/tiwi.git"
   },
-  "keywords": [
-    "baqhub",
-    "javascript",
-    "typescript",
-    "react",
-    "react-native",
-    "variants",
-    "tailwind",
-    "style",
-    "css"
+  "files": [
+    "dist"
   ],
   "type": "module",
   "sideEffects": false,
-  "scripts": {
-    "ts": "tsc --build --watch ./tsconfig.cjs.json ./tsconfig.json",
-    "build": "tsc --build ./tsconfig.cjs.json ./tsconfig.json && tsconfig-to-dual-package",
-    "build:clean": "rm -rf ./build",
-    "publish": "yarn npm publish",
-    "test": "vitest"
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "imports": {
+    "#/*": "./src/*"
   },
-  "module": "./build/esm/src/index.js",
-  "main": "./build/cjs/src/index.js",
-  "react-native": "./build/esm/src/index.native.js",
-  "types": "./build/cjs/src/index.d.ts",
   "exports": {
     ".": {
-      "react-native": "./build/esm/src/index.native.js",
-      "import": "./build/esm/src/index.js",
-      "require": "./build/cjs/src/index.js"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
+  },
+  "scripts": {
+    "ts": "tsc --noEmit --watch",
+    "build": "vp pack",
+    "build:clean": "rm -rf ./dist",
+    "check": "vp check",
+    "lint": "vp lint",
+    "fmt": "vp fmt",
+    "test": "vp test run"
   },
   "dependencies": {
-    "tailwind-merge": "^3.0.2"
-  },
-  "peerDependencies": {
-    "nativewind": "^4.1.0",
-    "react": "^17.0.0 || ^18.0.0 || ^19.0.0"
-  },
-  "peerDependenciesMeta": {
-    "nativewind": {
-      "optional": true
-    }
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@testing-library/dom": "10.4.0",
-    "@testing-library/react": "16.2.0",
-    "@types/react": "19.0.10",
-    "@types/react-dom": "19.0.4",
-    "@typescript-eslint/eslint-plugin": "8.25.0",
-    "@typescript-eslint/parser": "8.25.0",
-    "eslint": "8.57.1",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-prettier": "5.2.3",
-    "eslint-plugin-react-hooks": "5.1.0",
-    "globals": "16.0.0",
-    "jsdom": "26.0.0",
-    "nativewind": "4.1.23",
-    "prettier": "3.5.2",
-    "prettier-plugin-organize-imports": "4.1.0",
-    "prettier-plugin-tailwindcss": "0.6.11",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "tailwindcss": "4.0.9",
-    "tsconfig-to-dual-package": "1.2.0",
-    "typescript": "5.7.3",
-    "vitest": "3.0.7"
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/react": "16.3.2",
+    "@types/react": "19.2.16",
+    "@types/react-dom": "19.2.3",
+    "jsdom": "26.1.0",
+    "oxlint-tsgolint": "0.23.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "typescript": "6.0.3",
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.1.24",
+    "vite-plus": "0.1.24",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@0.1.24"
   },
-  "packageManager": "yarn@4.6.0"
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0"
+  },
+  "resolutions": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.1.24",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@0.1.24"
+  },
+  "packageManager": "yarn@4.16.0"
 }
