@@ -5,6 +5,7 @@ export default defineConfig({
     entry: ["src/index.ts"],
     dts: true,
     format: ["esm", "cjs"],
+    exports: true,
   },
   test: {
     environment: "jsdom",
