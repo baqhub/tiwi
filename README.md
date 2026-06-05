@@ -339,12 +339,12 @@ type Variants = VariantsOf<typeof SizeButton>; // "medium" | "large".
 Tiwi is compatible with React Native through [Uniwind](https://uniwind.dev/), which
 adds Tailwind `className` support to React Native components.
 
-Once Uniwind is set up in your app, React Native elements can be styled in the same
-way:
+On React Native, import Tiwi from `tiwi/native`. It exposes the same API minus the
+DOM intrinsic elements (`tiwi.div`, `tiwi.span`, …), which don't exist on native:
 
 ```tsx
 import {View, Text} from "react-native";
-import tiwi from "tiwi";
+import tiwi from "tiwi/native";
 
 const Avatar = tiwi(View)`
   size-10
@@ -364,7 +364,7 @@ Uniwind's `withUniwind` first:
 ```tsx
 import {withUniwind} from "uniwind";
 import {SafeAreaView} from "react-native-safe-area-context";
-import tiwi from "tiwi";
+import tiwi from "tiwi/native";
 
 const Screen = tiwi(withUniwind(SafeAreaView))`
   flex-1
