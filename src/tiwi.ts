@@ -66,7 +66,7 @@ type JSXFunction = (
   props: Record<string, any> | undefined | null
 ) => ReactNode;
 
-function buildTiwiBase(createElement: JSXFunction): TiwiFunction {
+export function buildTiwiBase(createElement: JSXFunction): TiwiFunction {
   return <E extends ElementType>(Element: ElementWithTiwiProps<E>) => {
     type TVariant =
       E extends TiwiExoticComponent<any, any, infer T> ? T : never;

@@ -1,6 +1,6 @@
 {
   "name": "tiwi",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "React library to create components with Tailwind styles baked in.",
   "keywords": [
     "baqhub",
@@ -29,6 +29,13 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
+  "typesVersions": {
+    "*": {
+      "native": [
+        "./dist/native.d.cts"
+      ]
+    }
+  },
   "imports": {
     "#/*": "./src/*"
   },
@@ -36,6 +43,10 @@
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./native": {
+      "import": "./dist/native.mjs",
+      "require": "./dist/native.cjs"
     },
     "./package.json": "./package.json"
   },

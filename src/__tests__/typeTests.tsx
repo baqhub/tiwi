@@ -40,6 +40,33 @@ import {tiwi} from "#/index.ts";
   const _Test = tiwi(Component);
 }
 
+// Accept a component whose className is widened beyond string.
+//
+// Mirrors React Native's Animated.View: Uniwind adds className via module
+// augmentation, then Animated widens it to also accept animated values. A
+// string is still assignable to it, so tiwi should accept the component.
+{
+  type AnimatedNode = {__animatedNode: true};
+  type AnimatedViewProps = {className?: string | AnimatedNode; style?: unknown};
+  const AnimatedView = (_: AnimatedViewProps) => <></>;
+  const Styled = tiwi(AnimatedView)``;
+  const _test = <Styled style={{}} />;
+}
+
+// Fail on a component that has props but no className.
+{
+  const Component = (_: {style?: unknown}) => <></>;
+  // @ts-expect-error No className.
+  const _Test = tiwi(Component);
+}
+
+// Fail on a component whose className can't accept a string.
+{
+  const Component = (_: {className?: number}) => <></>;
+  // @ts-expect-error className can't take a string.
+  const _Test = tiwi(Component);
+}
+
 // Pass along props.
 {
   type Props = {className?: string; isEnabled: boolean};
