@@ -1,4 +1,4 @@
-import {
+import type {
   ComponentProps,
   ComponentRef,
   ElementType,
@@ -57,11 +57,9 @@ export interface TiwiExoticComponent<
   TRef,
   TVariant extends string,
 > extends NamedExoticComponent<
-    PropsWithoutRef<
-      PropsWithoutVariants<TProps> & TiwiComponentProps<TVariant>
-    > &
-      RefAttributes<TRef>
-  > {
+  PropsWithoutRef<PropsWithoutVariants<TProps> & TiwiComponentProps<TVariant>> &
+    RefAttributes<TRef>
+> {
   [tiwiComponentSymbol]: true;
 }
 

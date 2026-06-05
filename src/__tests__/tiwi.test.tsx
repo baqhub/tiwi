@@ -1,7 +1,8 @@
 import {act, render} from "@testing-library/react";
-import {Component, FC, ReactNode, useEffect, useRef} from "react";
+import {Component, useEffect, useRef} from "react";
+import type {FC, ReactNode} from "react";
 import {describe, expect, test} from "vitest";
-import {tiwi} from "../index.js";
+import {tiwi} from "#/index.ts";
 
 function renderNode(element: ReactNode) {
   const {asFragment} = render(element);
@@ -113,8 +114,8 @@ describe("Basic function with intrinsic elements", () => {
   test("Render intrinsic with class override and other style", () => {
     // Prepare.
     const Header = tiwi.header`
-      text-amber-200
       bg-red-200
+      text-amber-200
     `;
 
     // Act.
@@ -641,9 +642,9 @@ describe("Variants", () => {
     // Prepare.
     type Variants = "small" | "large";
     const Header = tiwi.header<Variants>`
-      text-amber-200
-
       p-0
+
+      text-amber-200
       ${{
         small: `p-2`,
         large: `p-3`,
@@ -658,7 +659,7 @@ describe("Variants", () => {
     // Assert.
     expect(actualWithoutVariant).toMatchInlineSnapshot(`
       <header
-        class="text-amber-200 p-0"
+        class="p-0 text-amber-200"
       />
     `);
     expect(actualWithVariant1).toMatchInlineSnapshot(`

@@ -1,28 +1,27 @@
-import {
+import {forwardRef, useMemo} from "react";
+import type {
   ComponentProps,
   ComponentRef,
   ComponentType,
   ElementType,
-  forwardRef,
   JSX,
   ReactNode,
-  useMemo,
 } from "react";
 import {twMerge} from "tailwind-merge";
-import {allIntrinsicElements} from "./elements.js";
-import {
+import {allIntrinsicElements} from "#/elements.ts";
+import {tiwiComponentSymbol} from "#/types.ts";
+import type {
   ElementWithTiwiProps,
   IntrinsicElementsBuilderMap,
   PropsWithoutVariants,
   Tiwi,
   TiwiComponentProps,
-  tiwiComponentSymbol,
   TiwiExoticComponent,
   TiwiFunction,
   TiwiProps,
   TiwiVariants,
   TiwiVariantsProp,
-} from "./types.js";
+} from "#/types.ts";
 
 //
 // Variants helpers.
@@ -89,7 +88,6 @@ function buildTiwiBase(createElement: JSXFunction): TiwiFunction {
           props as IntermediateProps<T>;
 
         const flatVariants = variantsToArray(variants);
-        const flatVariantsString = flatVariants.join("::");
 
         const mergedClassName = useMemo(() => {
           const allClassNames = classNames.reduce((list, current, index) => {
@@ -113,10 +111,7 @@ function buildTiwiBase(createElement: JSXFunction): TiwiFunction {
           }, [] as string[]);
 
           return twMerge([...allClassNames, className]) || undefined;
-
-          // Refresh on parent variables to make fast-refresh work in RN.
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [classNames, variantDefinitions, className, flatVariantsString]);
+        }, [className, flatVariants]);
 
         if (isTiwi) {
           return createElement(AnyElement, {
