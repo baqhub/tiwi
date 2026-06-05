@@ -77,14 +77,23 @@ export interface TiwiBuilder<
   ): TiwiExoticComponent<TProps, TRef, T | TVariant>;
 }
 
-// Ensure the props of Element extend TiwiProps.
+// Ensure the Element accepts a `className` prop we can hand a string to.
+//
+// We check that a `string` is assignable *to* the component's `className`
+// rather than that the component's `className` is assignable to `string`.
+// The latter (the obvious `Props extends TiwiProps`) breaks for wrappers like
+// React Native's `Animated.View`: Uniwind adds `className` via module
+// augmentation, then `Animated` widens it to also accept animated values
+// (e.g. `string | AnimatedNode`), which is no longer assignable to `string`.
+// Checking the other direction still accepts those while rejecting components
+// that have no `className` prop (or one that can't take a string).
 export type ElementWithTiwiProps<E> =
   E extends ElementType<infer Props>
-    ? keyof Props extends never
-      ? never
-      : Props extends TiwiProps
+    ? "className" extends keyof Props
+      ? string extends Props["className"]
         ? E
         : never
+      : never
     : never;
 
 export interface TiwiFunction {
